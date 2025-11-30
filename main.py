@@ -1,6 +1,7 @@
 import os
 import requests
 from telethon import TelegramClient, events
+from telethon.sessions import MemorySession
 
 # Pega configurações das Variáveis de Ambiente do Easypanel
 api_id = int(os.getenv('API_ID'))
@@ -12,7 +13,7 @@ webhook_url = os.getenv('WEBHOOK_URL')
 # Seus canais alvo (pode ser via env também se quiser ser chique)
 target_channels = [-100123456789] 
 
-client = TelegramClient(session_name, api_id, api_hash)
+client = TelegramClient(MemorySession(), api_id, api_hash)
 
 @client.on(events.NewMessage(chats=target_channels))
 async def handler(event):
